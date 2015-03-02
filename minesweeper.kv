@@ -1,0 +1,118 @@
+#:kivy 1.8.0
+
+
+<RootWidget>:
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.size
+        padding: '10dp'
+        spacing: '5dp'
+        
+        BoxLayout:
+            canvas.before:
+                Color:
+                    rgb: .2, .33, .5
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+                    
+            orientation: 'horizontal'
+            size_hint: 1, .05
+            padding: '10dp'
+        
+            Button:
+                size_hint_x: .1
+                text: "[color=1874CE]New Game[/color]"
+                font_size: '15dp'
+                markup: 'True'
+                on_release: root.manager.current = 'menu_screen'
+            
+            Label:
+                size_hint_x: .8
+                font_size: '20dp'
+                text: root.result_text
+                
+        GridLayout:
+            id: grid
+            size_hint: 1, .95
+            spacing: '3dp'
+    
+<Blank>:
+    font_size: '20dp'
+    markup: 'True'
+    background_normal: "normal.png"
+    background_disabled_down: "down.png"
+    background_disabled_normal: "down.png"
+    on_release: self.parent.parent.parent.sweep(self)
+
+<Mine>:
+    font_size: '20dp'
+    markup: 'True'
+    background_normal: "normal.png"
+    background_disabled_down: "down.png"
+    background_disabled_normal: "down.png"
+    on_release: self.parent.parent.parent.sweep(self)
+    
+                
+<Menu>:
+    GridLayout:
+        rows: 2
+        padding: '30dp'
+        spacing: '30dp'
+        
+        Button:
+            text: "8 x 8"
+            on_press: root.set_sides(8, 8)
+        Button:
+            text: "16 x 16"
+            on_press: root.set_sides(16, 16)
+        Button:
+            text: "24 x 16"
+            on_press: root.set_sides(24, 16, [800, 660])
+        Button:
+            text: "32 x 16"
+            on_press: root.set_sides(32, 16, [])
+                  
+<Manager>:
+    id: screen_manager
+    menu: menu
+    game: game
+    
+    Menu:
+        id: menu
+        manager: screen_manager
+        name: 'menu_screen'
+        
+    RootWidget:
+        id: game
+        manager: screen_manager
+        name: 'game_screen'
+        
+        
+
+            
+    
+        
+        
+        
+            
+            
+        
+
+
+            
+    
+    
+       
+        
+
+    
+
+    
+        
+
+    
+
+
+    
+
